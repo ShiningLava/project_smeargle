@@ -35,7 +35,6 @@ blur_level = config['blur_level']
 prompt = config["prompt"]
 prompt_var = f"{prompt}"
 test_image_output_folder = "test_image_output/"
-# "prompt" : "dark, high contrast, cosmic setting, beautiful, intense dark blue and cyan galaxies, planets, stars, high quality, high detail",
 
 def sd_api_call():
     global api_call_count
