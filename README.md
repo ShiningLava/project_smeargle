@@ -77,6 +77,7 @@ A: Yes.
 
 
 BEFORE AND AFTER:
+
 ![abstractum - miss u (before and after)](https://github.com/user-attachments/assets/7b7c5308-0279-4a41-803b-3710bcc0ac65)
 ![Satl   Malaky - Loneliness (before and after)](https://github.com/user-attachments/assets/b97132a4-105a-4e51-a35a-41a7706e343d)
 
