@@ -8,7 +8,7 @@ Last revision date: Sep 08 2024
 
 Music players tested: Plex, Plexamp, VLC
 
-Currently supported music file types: .mp3, .opus
+### Currently supported music file types: .mp3, .opus
 
 
 Project Smeargle is a few python scripts that are designed to detect if your music files are missing artwork. If they are, PS will send an API call to a locally hosted Stable Diffusion instance to generate some artwork. After image generation, the image will (optionally) be processed to include the artist, song title, as well as a logo printed on the image. This processed image will then be saved as a cover.png file alongside the music file, with image tags and a watermark to indicate that it is AI generated. 
@@ -18,11 +18,11 @@ Once the image is saved and the process is finished, many music players will be 
 
 
 
-Setup Guide:
+# Setup Guide:
 - download + setup stable diffusion + api
 	- https://github.com/AUTOMATIC1111/stable-diffusion-webui
    
-- Linux:
+## - Linux:
 	- git clone https://github.com/ShiningLava/project_smeargle.git
 	- apt install python3-venv
 	- cd project_smeargle
@@ -37,7 +37,7 @@ Setup Guide:
 - play around with config.json and have fun
 
 
-FAQ:
+# FAQ:
 
 Q: Is this going to delete or ruin my current artwork? Or corrupt my music?
 
@@ -85,7 +85,7 @@ Q: Your code sucks?
 A: Yes. 
 
 
-BEFORE AND AFTER:
+# BEFORE AND AFTER:
 
 ![abstractum - miss u (before and after)](https://github.com/user-attachments/assets/7b7c5308-0279-4a41-803b-3710bcc0ac65)
 ![Satl   Malaky - Loneliness (before and after)](https://github.com/user-attachments/assets/b97132a4-105a-4e51-a35a-41a7706e343d)
