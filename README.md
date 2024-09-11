@@ -19,11 +19,11 @@ Once the image is saved and the process is finished, many music players will be 
 
 
 # Setup Guide:
-## Requirement: 
-1. download + setup stable diffusion + api
-	- https://github.com/AUTOMATIC1111/stable-diffusion-webui
+## Prerequisite: 
+1. Download and setup the Stable Diffusion application with the API enabled
+	- See SD documentation at https://github.com/AUTOMATIC1111/stable-diffusion-webui
    
-## Linux:
+## Linux Setup:
 1. Clone the repository
    
    ```git clone https://github.com/ShiningLava/project_smeargle.git```
