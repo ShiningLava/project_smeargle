@@ -19,19 +19,20 @@ Once the image is saved and the process is finished, many music players will be 
 
 
 # Setup Guide:
-- download + setup stable diffusion + api
+## Requirement: 
+1. download + setup stable diffusion + api
 	- https://github.com/AUTOMATIC1111/stable-diffusion-webui
    
 ## - Linux:
-	- git clone https://github.com/ShiningLava/project_smeargle.git
-	- apt install python3-venv
-	- cd project_smeargle
-	- python3 -m venv venv
-	- source venv/bin/activate
-	- pip install -r requirements.txt
-	- nano config.json
-		- change music_directory and stable_diffusion_url
-	- python PSv1.0.py
+1. git clone https://github.com/ShiningLava/project_smeargle.git
+2. apt install python3-venv
+3. cd project_smeargle
+4. python3 -m venv venv
+5. source venv/bin/activate
+6. pip install -r requirements.txt
+7. nano config.json
+	change music_directory and stable_diffusion_url
+8. python PSv1.0.py
 	
 - run the script, watch console for summary at the end
 - play around with config.json and have fun
