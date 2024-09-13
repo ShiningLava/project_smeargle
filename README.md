@@ -56,6 +56,7 @@ Once the image is saved and the process is finished, many music players will be 
 	
 
 ## Windows Setup:
+### The following commands will be entered in CMD.exe
 1. Clone the repository into the desired directory
    
    ```cd C:\Users\[USER]\Desktop``` Be sure to change the directory to your desired directory
