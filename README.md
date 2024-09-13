@@ -19,11 +19,17 @@ Once the image is saved and the process is finished, many music players will be 
 
 
 # Setup Guide:
-## Prerequisite: 
+## Prerequisites: 
 1. Download and setup the Stable Diffusion application with the API enabled
 	- See SD documentation at https://github.com/AUTOMATIC1111/stable-diffusion-webui
+2. Download and install Python
+   	- Be sure to select "add to PATH" during installation
+   	- Python will be installed by default on most Linux distros
+3. Download and install Git
+   	- On windows, in CMD enter ```winget install Git.Git```
+   	- Git will be installed by default on most Linux Distros
    
-## Linux Setup:
+## Linux/Ubuntu Setup:
 1. Clone the repository
    
    ```git clone https://github.com/ShiningLava/project_smeargle.git```
@@ -48,9 +54,30 @@ Once the image is saved and the process is finished, many music players will be 
 
     ```python PSv1.0.py```
 	
-- run the script, watch console for summary at the end
-- play around with config.json and have fun
 
+## Windows Setup:
+1. Clone the repository into the desired directory
+   
+   ```cd C:\Users\[USER]\Desktop``` Be sure to change the directory to your desired directory
+   
+   ```git clone https://github.com/ShiningLava/project_smeargle.git```
+3. Change directory and initialize the virtual environment
+   
+   ```cd project_smeargle```
+   
+   ```python -m venv venv```
+
+   ```venv\Scripts\activate.bat```
+4. Install the requirements
+   
+    ```pip install -r requirements.txt```
+5. Edit the config file and change music_directory and stable_diffusion_url
+   
+    - In Windows, this can easily be done by selecting "config.json" and opening it in Notepad (or text editor of your choice)
+	
+6. Run the script
+
+    ```python PSv1.0.py```
 
 # FAQ:
 
