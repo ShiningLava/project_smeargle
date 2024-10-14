@@ -27,6 +27,7 @@ Once the image is saved and the process is finished, many music players will be 
    	- Python will be installed by default on most Linux distros
 3. Download and install Git
    	- On windows, in CMD enter ```winget install Git.Git```
+   		- Restart CMD
    	- Git will be installed by default on most Linux Distros
    
 ## Linux/Ubuntu Setup:
