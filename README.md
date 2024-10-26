@@ -121,7 +121,7 @@ A: I'm not good at prompting in Stable Diffusion at the moment. Space is an easy
 
 Q: Can I change the parameters of the API call?
 
-A: Yes, however this must be done in the PSv1.0.py script instead of config.json. This can be found near the top of the custom defined function "sd_api_call()" in the script. If you would like to adjust these settings, please see the example in the Stable Diffusion txt2img API documentation at http://<stable_diffusion_ip>:7860/docs#/default/text2imgapi_sdapi_v1_txt2img_post for syntax guidance. 
+A: Yes, however this must be done in the PSv1.0.py script instead of config.json. This can be found near the top of the function "sd_api_call()" in the script. If you would like to adjust these settings, please see the example in the Stable Diffusion txt2img API documentation at http://<stable_diffusion_ip>:7860/docs#/default/text2imgapi_sdapi_v1_txt2img_post for syntax guidance. 
 
 
 Q: Your code sucks?
