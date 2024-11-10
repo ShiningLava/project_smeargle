@@ -104,7 +104,7 @@ Q: How do I get rid of the images made by this script?
 A: Run the Cover_Image_Remover.py script. It's recommended to set dry_run_enabled = true in config.json file first to test the script. Once you are satisfied with the results printed in the console, set dry_run_enabled = false in config.json and run the script again to actually delete PS images.
 
 
-Q: I ran PSv1.0.py but I didn't get any artwork with my music. What gives?
+Q: I ran smeargle.py but I didn't get any artwork with my music. What gives?
 
 A: Check config.json file and double check `dry_run_enabled` and `test_folder_enabled`. `Dry_run_enabled` will skip generating art and the `test_folder_enabled` will generate art, but will save them at /project_smeargle/test_image_output instead of saving them with the music file.
 
