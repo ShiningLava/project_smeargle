@@ -202,10 +202,22 @@ def check_and_generate(dirpath, musicfile, music_extension):
     
     tag = music_tag.load_file(f"{musicfilepath}")
 
-    # check if there is any artwork attached to the .mp3 file ("artwork" tag)
-    if tag['artwork'].first and (music_extension == ".mp3"):
-        print("non ai-generated art found. skipping file\n")
-        return
+    # check if there is any artwork attached to the file ("artwork" tag)
+        if music_extension == ".mp3":
+        	try:
+        		if bool(tag['artwork'].first):
+        			print("non ai-generated art found. skipping file (.mp3)\n")
+        			return
+        	except:
+        		print("keyError .mp3\n")
+
+        elif music_extension == ".opus":
+        	try:
+        		if bool(tag['artwork'].first):
+        			print("non ai-generated art found. skipping file (.opus)\n")
+        			return
+        	except:
+        		print(".opus found with no attached artwork. checking if cover.png exists\n")
 
     # check if cover.png exists (common artwork format)
     if os.path.isfile(f"{dirpath}\\cover.png") and bool(regenerate_ai_artwork):
