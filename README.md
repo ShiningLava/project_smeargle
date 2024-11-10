@@ -106,8 +106,7 @@ A: Run the Cover_Image_Remover.py script. It's recommended to set dry_run_enable
 
 Q: I ran PSv1.0.py but I didn't get any artwork with my music. What gives?
 
-A: Check config.json file and double check dry_run_enabled and test_folder_enabled. Dry runs will skip generating art and will skip deleting art. Test folder which hosts images if test_folder_enabled = true, can be found at /project_smeargle/test_image_output/. 
-
+A: Check config.json file and double check `dry_run_enabled` and `test_folder_enabled`. `Dry_run_enabled` will skip generating art and the `test_folder_enabled` will generate art, but will save them at /project_smeargle/test_image_output instead of saving them with the music file.
 
 Q: Why don't you support more file types?
 
