@@ -113,7 +113,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     if bool(print_artist_item) == True:
         # Set font properties for artist text
         font_size = 40
-        font = ImageFont.truetype("ariblk.ttf", font_size)
+        font = ImageFont.load_default()
 
         # Set position of artist text
         outline_color = 'black'
@@ -122,7 +122,7 @@ def sd_api_call(dirpath, artist_item, title_item):
         # If artist_item is too large, size down the font to fit the image
         img_fraction = 0.95
         while font_size > 9:
-            font = ImageFont.truetype("ariblk.ttf", font_size)
+            font = ImageFont.load_default()
             if font.getlength(text) < img_fraction * 400:
                 break
             else:
