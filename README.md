@@ -4,7 +4,7 @@ Thanks for checking out Project Smeargle!
 
 Current version: v1.0
 
-Last revision date: Sep 08 2024
+Last revision date: Nov 9 2024
 
 Music players tested: Plex, Plexamp, VLC
 
