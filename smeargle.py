@@ -234,7 +234,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
 
     else:
         print("cover art does not exist. calling stable diffusion api")
-        print(f"sending sd api call:\ntitle: {tag['title']}\nartist: {tag["artist"]}")
+        print(f"sending sd api call:\ntitle: {tag['title']}\nartist: {tag['artist']}")
         sd_api_call(dirpath, tag["artist"], tag['title'])
         print(f"Total images created: {api_call_count}")
         print("changing directory\n")
