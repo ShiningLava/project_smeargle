@@ -53,7 +53,7 @@ Once the image is saved and the process is finished, many music players will be 
 	
 6. Run the script
 
-    ```python PSv1.0.py```
+    ```python smeargle.py```
 	
 
 ## Windows Setup:
@@ -79,7 +79,7 @@ Once the image is saved and the process is finished, many music players will be 
 	
 6. Run the script
 
-    ```python PSv1.0.py```
+    ```python smeargle.py```
 
 # FAQ:
 
