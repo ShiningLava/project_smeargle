@@ -237,7 +237,6 @@ def check_and_generate(dirpath, musicfile, music_extension):
         print(f"sending sd api call:\ntitle: {tag['title']}\nartist: {tag['artist']}")
         sd_api_call(dirpath, tag["artist"], tag['title'])
         print(f"Total images created: {api_call_count}")
-        print("changing directory\n")
         
 
 def main():
