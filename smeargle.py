@@ -217,7 +217,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
         			print("non ai-generated art found. skipping file (.opus)\n")
         			return
         	except:
-        		print(".opus found with no attached artwork. checking if cover.png exists\n")
+        		print(".opus found with no attached artwork. checking if cover.png exists")
 
     # check if cover.png exists (common artwork format)
     if os.path.isfile(f"{dirpath}\\cover.png") and bool(regenerate_ai_artwork):
