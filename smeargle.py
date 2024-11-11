@@ -260,8 +260,7 @@ def main():
             elif musicfile.endswith((".jpg", ".png")):
                 print(f"potential cover art found: {musicfile}.")
             else:
-                print(f"unsupported file type: {dirpath}/{musicfile}")
-                print("changing directory\n")
+                print(f"unsupported file type: {dirpath}/{musicfile}/n")
 
     print("Scipt complete in %s seconds" % (time.time() - start_time))
     print(f"Total images created: {api_call_count}")
