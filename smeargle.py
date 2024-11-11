@@ -262,7 +262,7 @@ def main():
                 print(f"unsupported file type: {dirpath}/{musicfile}/n")
 
     print("Scipt complete in %s seconds" % (time.time() - start_time))
-    print(f"Total images created: {api_call_count}")
+    print(f"Total images created: {api_call_count}\n")
 
 def argument_parser():
     parser = argparse.ArgumentParser()
