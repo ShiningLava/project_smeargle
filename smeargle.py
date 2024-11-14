@@ -112,8 +112,8 @@ def sd_api_call(dirpath, artist_item, title_item):
 
     if bool(print_artist_item) == True:
         # Set font properties for artist text
-        font_size = 40
-        font = ImageFont.load_default()
+        font_size = 100
+        font = ImageFont.load_default(font_size)
 
         # Set position of artist text
         outline_color = 'black'
@@ -122,7 +122,7 @@ def sd_api_call(dirpath, artist_item, title_item):
         # If artist_item is too large, size down the font to fit the image
         img_fraction = 0.95
         while font_size > 9:
-            font = ImageFont.load_default()
+            font = ImageFont.load_default(font_size)
             if font.getlength(text) < img_fraction * 400:
                 break
             else:
@@ -143,7 +143,7 @@ def sd_api_call(dirpath, artist_item, title_item):
 
     if bool(print_track_item) == True:
         # Set font properties for artist text
-        font_size = 40
+        font_size = 100
         font = ImageFont.truetype('times', font_size)
 
         # Set position of track_item
@@ -259,7 +259,7 @@ def main():
             elif musicfile.endswith((".jpg", ".png")):
                 print(f"potential cover art found: {musicfile}.")
             else:
-                print(f"unsupported file type: {dirpath}/{musicfile}/n")
+                print(f"unsupported file type: {dirpath}/{musicfile}\n")
 
     print("Scipt complete in %s seconds" % (time.time() - start_time))
     print(f"Total images created: {api_call_count}\n")
