@@ -184,8 +184,8 @@ def sd_api_call(dirpath, artist_item, title_item):
         image.save(f'test_image_output/{api_call_count}.png', pnginfo=metadata)
         print(f"image successfully created, tagged, and moved to test_image_output/{api_call_count}.png. sleeping for {sleep_timer}s")
     else:
-        image.save(f'{dirpath}\\cover.png', pnginfo=metadata)
-        print(f"image successfully created, tagged, and moved to {dirpath}\\cover.png. sleeping for {sleep_timer}s\n")
+        image.save(f'{dirpath}/cover.png', pnginfo=metadata)
+        print(f"image successfully created, tagged, and moved to {dirpath}/cover.png. sleeping for {sleep_timer}s\n")
 
     # Sleep (helps break up GPU tasks for better temperatures)
     time.sleep(sleep_timer)
@@ -220,16 +220,17 @@ def check_and_generate(dirpath, musicfile, music_extension):
         		print(".opus found with no attached artwork. checking if cover.png exists")
 
     # check if cover.png exists (common artwork format)
-    if os.path.isfile(f"{dirpath}\\cover.png") and bool(regenerate_ai_artwork):
+    if os.path.isfile(f"{dirpath}/cover.png") and bool(regenerate_ai_artwork):
         print("cover art exists (cover.png). checking if ai generated")
-        if check_author_ai(f"{dirpath}\\cover.png"):
+        if check_author_ai(f"{dirpath}/cover.png"):
             print("cover.png detected to be ai generated. regenerating")
-            sd_api_call()
+            sd_api_call(dirpath, tag["artist"], tag['title'])
+            print(f"Total images created: {api_call_count}\n")
         else:
             print("cover.png detected to be ai generated, but regenerate_ai_artwork is set to false. Skipping\n")
 
     # check if AlbumArt.jpg exists (common artwork format)
-    elif os.path.isfile(f"{dirpath}\\AlbumArt.jpg"):
+    elif os.path.isfile(f"{dirpath}/AlbumArt.jpg"):
         print("cover art exists (AlbumArt.jpg). skipping this file\n")
 
     else:
