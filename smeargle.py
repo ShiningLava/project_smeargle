@@ -220,9 +220,18 @@ def check_and_generate(dirpath, musicfile, music_extension):
         	except:
         		print(".opus found with no attached artwork. checking if cover.png exists")
 
-    elif music_extension == ".flac":
-    	print("FLAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
-    	return
+    #elif music_extension == ".flac":
+    	#print("FLAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
+    	#return
+    #elif music_extension == ".aac":
+    	#print("AAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
+    	#return
+    #elif music_extension == ".wav":
+        #print("WAV FOUND BUT SUPPORT IS NOT YET ADDED\n")
+        #return
+    #elif music_extension == ".mkv":
+        #print("MKV FOUND BUT SUPPORT IS NOT YET ADDED\n")
+        #return
 
     # check if cover.png exists (common artwork format)
     if os.path.isfile(f"{dirpath}/cover.png") and bool(regenerate_ai_artwork):
@@ -241,7 +250,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
     else:
         print("cover art does not exist. calling stable diffusion api")
         print(f"sending sd api call:\ntitle: {tag['title']}\nartist: {tag['artist']}")
-        sd_api_call(dirpath, tag["artist"], tag['title'])
+        sd_api_call(dirpath, tag['artist'], tag['title'])
         print(f"Total images created: {api_call_count}\n")
         
 
@@ -267,6 +276,10 @@ def main():
                 #check_and_generate(dirpath, musicfile, music_extension=".flac")
             #elif musicfile.endswith(".aac"):
             	#check_and_generate(dirpath, musicfile, music_extension=".aac")
+            #elif musicfile.endswith(".wav"):
+                #check_and_generate(dirpath, musicfile, music_extension=".wav")
+            #elif musicfile.endswith(".mkv"):
+                #check_and_generate(dirpath, musicfile, music_extension=".mkv")
             elif musicfile.endswith((".jpg", ".png")):
                 print(f"potential cover art found: {musicfile}.")
             else:
@@ -275,7 +288,8 @@ def main():
 
     print("Scipt complete in %s seconds" % (time.time() - start_time))
     print(f"Total images created: {api_call_count}")
-    print(f"Total files skipped due to unsupported file types: {unsupported_file_count}")
+    if unsupported_file_count > 0:
+    	print(f"Total files skipped due to unsupported file types: {unsupported_file_count}")
 
 def argument_parser():
     parser = argparse.ArgumentParser()
