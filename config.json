@@ -9,6 +9,7 @@
   "_comment2" : "PS currently only supports locally hosted instances of Stable Diffusion. Use API calls to public or paid instances at your own risk",
 
   "prompt" : "dark, high contrast, cosmic setting, beautiful, intense dark blue and cyan galaxies, planets, stars, extremely high quality, telescopic, Hubble Telescope, Oort Cloud",
+  "negative_prompt" : "((text)), ((humans)), ((faces)), ((walls)), couches, ((paintings)), bodies, disconnected arms, disconnected legs, deformed face, ugly face, disappearing thigh, malformed, couch, sofa, pillow, living room, cheap, low budget, low quality, poor"
 
   "sleep_timer" : 10,
   "_comment3" : "sleep_timer is the number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down",

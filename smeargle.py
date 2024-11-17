@@ -37,9 +37,11 @@ print_artist_item = config['print_artist_item']
 print_track_item = config['print_track_item']
 print_icon = config['print_icon']
 blur_level = config['blur_level']
-prompt = config["prompt"]
+prompt = config['prompt']
 prompt_var = f"{prompt}"
 test_image_output_folder = "test_image_output/"
+negative_prompt = config['negative_prompt']
+negative_prompt_var = f"{negative_prompt_var}"
 
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
@@ -62,7 +64,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     print(f"prompt: {prompt_var}")
     payload = {
         "prompt": f"{prompt_var}",
-        "negative_prompt": "((text)), ((humans)), ((faces)), walls, couches, paintings, bodies, disconnected arms, disconnected legs, deformed face, ugly face, disappearing thigh, malformed, couch, sofa, pillow, living room, cheap, low budget, low quality, poor",
+        "negative_prompt": f"{negative_prompt_var}",
         "width": 400,
         "height": 400,
         "steps": 25
