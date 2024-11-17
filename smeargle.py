@@ -220,9 +220,13 @@ def check_and_generate(dirpath, musicfile, music_extension):
         	except:
         		print(".opus found with no attached artwork. checking if cover.png exists")
 
-    #elif music_extension == ".flac":
-    	#print("FLAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
-    	#return
+    elif music_extension == ".flac":
+    	try:
+    		if bool(tag['artwork'].first):
+    			print("non ai-generated art found. skipping file (.flac)\n")
+    			return
+    	except:
+    		print("keyError .flac\n")
     #elif music_extension == ".aac":
     	#print("AAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
     	#return
@@ -252,7 +256,6 @@ def check_and_generate(dirpath, musicfile, music_extension):
         print(f"sending sd api call:\ntitle: {tag['title']}\nartist: {tag['artist']}")
         sd_api_call(dirpath, tag['artist'], tag['title'])
         print(f"Total images created: {api_call_count}\n")
-        
 
 def main():
     args = argument_parser()
@@ -272,8 +275,8 @@ def main():
                 check_and_generate(dirpath, musicfile, music_extension=".mp3")
             elif musicfile.endswith(".opus"):
                 check_and_generate(dirpath, musicfile, music_extension=".opus")
-            #elif musicfile.endswith(".flac"):
-                #check_and_generate(dirpath, musicfile, music_extension=".flac")
+            elif musicfile.endswith(".flac"):
+                check_and_generate(dirpath, musicfile, music_extension=".flac")
             #elif musicfile.endswith(".aac"):
             	#check_and_generate(dirpath, musicfile, music_extension=".aac")
             #elif musicfile.endswith(".wav"):
