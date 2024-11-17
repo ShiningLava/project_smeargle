@@ -202,7 +202,6 @@ def check_author_ai(dirpath, name:str = "AI"):
 def check_and_generate(dirpath, musicfile, music_extension):
     musicfilepath = os.path.join(dirpath, musicfile)
     print(f"{music_extension} found: {musicfilepath}")
-    
     tag = music_tag.load_file(f"{musicfilepath}")
 
     # check if there is any artwork attached to the file ("artwork" tag)
