@@ -8,7 +8,7 @@
   "stable_diffusion_address" : "http://127.0.0.1:7860/sdapi/v1/txt2img",
   "_comment2" : "PS currently only supports locally hosted instances of Stable Diffusion. Use API calls to public or paid instances at your own risk",
 
-  "prompt" : "dark, high contrast, cosmic setting, beautiful, intense dark blue and cyan galaxies, planets, stars, high quality, high detail",
+  "prompt" : "dark, high contrast, cosmic setting, beautiful, intense dark blue and cyan galaxies, planets, stars, extremely high quality, telescopic, Hubble Telescope, Oort Cloud",
 
   "sleep_timer" : 10,
   "_comment3" : "sleep_timer is the number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down",

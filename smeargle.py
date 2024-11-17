@@ -62,7 +62,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     print(f"prompt: {prompt_var}")
     payload = {
         "prompt": f"{prompt_var}",
-        "negative_prompt": "((text)), ((humans)), ((faces)), bodies, disconnected arms, disconnected legs, deformed face, ugly face, disappearing thigh, malformed, couch, sofa, pillow, living room, cheap, low budget, low quality, poor",
+        "negative_prompt": "((text)), ((humans)), ((faces)), walls, couches, paintings, bodies, disconnected arms, disconnected legs, deformed face, ugly face, disappearing thigh, malformed, couch, sofa, pillow, living room, cheap, low budget, low quality, poor",
         "width": 400,
         "height": 400,
         "steps": 25
