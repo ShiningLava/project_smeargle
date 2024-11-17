@@ -42,6 +42,7 @@ prompt_var = f"{prompt}"
 test_image_output_folder = "test_image_output/"
 negative_prompt = config['negative_prompt']
 negative_prompt_var = f"{negative_prompt}"
+sd_progress = 0
 
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
@@ -51,12 +52,16 @@ def sd_api_call(dirpath, artist_item, title_item):
     global print_artist_item
     global print_track_item
     global blur_level
+    global sd_progress
+
+    sd_progress = 0
 
     # Increment the total api call counter
     api_call_count += 1
 
     if dry_run_enabled:
-        return
+    	sd_progress += 1
+    	return
 
     # api call to local stable diffusion instance
     url = f"{stable_diffusion_address}"
@@ -190,6 +195,8 @@ def sd_api_call(dirpath, artist_item, title_item):
         image.save(f'{dirpath}/cover.png', pnginfo=metadata)
         print(f"image successfully created, tagged, and moved to {dirpath}/cover.png. sleeping for {sleep_timer}s\n")
 
+    sd_progress += 1
+
     # Sleep (helps break up GPU tasks for better temperatures)
     time.sleep(sleep_timer)
 
@@ -268,16 +275,23 @@ def main():
         os.makedirs(test_image_output_folder)
 
     # Walk through the directory and scan files for file types (.mp3, .opus, etc)
+    # After image creation, break to change directories to prevent duplicate work
     for dirpath, dirs, files in os.walk(music_directory):
         print(f"Current Directory: {dirpath}")
         print(f"Found Files: {files}")
         for musicfile in files:
             if musicfile.endswith(".mp3"):
                 check_and_generate(dirpath, musicfile, music_extension=".mp3")
+                if sd_progress > 0:
+                	break
             elif musicfile.endswith(".opus"):
                 check_and_generate(dirpath, musicfile, music_extension=".opus")
+                if sd_progress > 0:
+                	break
             elif musicfile.endswith(".flac"):
                 check_and_generate(dirpath, musicfile, music_extension=".flac")
+                if sd_progress > 0:
+                	break
             #elif musicfile.endswith(".aac"):
             	#check_and_generate(dirpath, musicfile, music_extension=".aac")
             #elif musicfile.endswith(".wav"):
