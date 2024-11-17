@@ -299,7 +299,7 @@ def main():
             #elif musicfile.endswith(".mkv"):
                 #check_and_generate(dirpath, musicfile, music_extension=".mkv")
             elif musicfile.endswith((".jpg", ".png")):
-                print(f"potential cover art found: {musicfile}.")
+                print(f"potential cover art found: {musicfile}\n")
             else:
                 print(f"unsupported file type: {dirpath}/{musicfile}\n")
                 unsupported_file_count += 1
