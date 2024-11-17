@@ -41,7 +41,7 @@ prompt = config['prompt']
 prompt_var = f"{prompt}"
 test_image_output_folder = "test_image_output/"
 negative_prompt = config['negative_prompt']
-negative_prompt_var = f"{negative_prompt_var}"
+negative_prompt_var = f"{negative_prompt}"
 
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
