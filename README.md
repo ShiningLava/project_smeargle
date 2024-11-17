@@ -1,11 +1,6 @@
 # project_smeargle
 Thanks for checking out Project Smeargle!
 
-
-Current version: v1.0
-
-Last revision date: Nov 9 2024
-
 Music players tested: Plex, Plexamp, VLC
 
 ### Currently supported music file types: .mp3, .opus
