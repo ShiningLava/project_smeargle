@@ -246,9 +246,9 @@ def check_and_generate(dirpath, musicfile, music_extension):
         #return
 
     # check if cover.png exists (common artwork format)
-    if os.path.isfile(f"{dirpath}/cover.png") and bool(regenerate_ai_artwork):
+    if os.path.isfile(f"{dirpath}/cover.png"):
         print("cover art exists (cover.png). checking if ai generated")
-        if check_author_ai(f"{dirpath}/cover.png"):
+        if check_author_ai(f"{dirpath}/cover.png") and bool(regenerate_ai_artwork):
             print("cover.png detected to be ai generated. regenerating")
             sd_api_call(dirpath, tag["artist"], tag['title'])
             print(f"Total images created: {api_call_count}\n")
@@ -299,7 +299,7 @@ def main():
             #elif musicfile.endswith(".mkv"):
                 #check_and_generate(dirpath, musicfile, music_extension=".mkv")
             elif musicfile.endswith((".jpg", ".png")):
-                print(f"potential cover art found: {musicfile}\n")
+                print(f"potential cover art found: {musicfile}")
             else:
                 print(f"unsupported file type: {dirpath}/{musicfile}\n")
                 unsupported_file_count += 1
