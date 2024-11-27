@@ -3,10 +3,10 @@ Thanks for checking out Project Smeargle!
 
 Music players tested: Plex, Plexamp, VLC
 
-### Currently supported music file types: .mp3, .opus
+### Currently supported music file types: .mp3, .opus, .flac
 
 
-Project Smeargle is a few python scripts that are designed to detect if your music files are missing artwork. If they are, PS will send an API call to a locally hosted Stable Diffusion instance to generate some artwork. After image generation, the image will (optionally) be processed to include the artist, song title, as well as a logo printed on the image. This processed image will then be saved as a cover.png file alongside the music file, with image tags and a watermark to indicate that it is AI generated. 
+Project Smeargle is a python script that is designed to detect if your music files are missing artwork. If they are, PS will send an API call to a locally hosted Stable Diffusion instance to generate some artwork. After image generation, the image will (optionally) be processed to include the artist, song title, as well as a logo printed on the image. This processed image will then be saved as a cover.png file alongside the music file, with image tags and a watermark to indicate that it is AI generated. 
 
 
 Once the image is saved and the process is finished, many music players will be able to detect the new album artwork and can display it when playing the music. 
@@ -42,7 +42,7 @@ Once the image is saved and the process is finished, many music players will be 
 4. Install the requirements
    
     ```pip install -r requirements.txt```
-5. Edit the config file and change music_directory and stable_diffusion_url
+5. Edit `config.json` and change `music_directory` and `stable_diffusion_url`
    
     ```nano config.json```
 	
@@ -55,7 +55,7 @@ Once the image is saved and the process is finished, many music players will be 
 ### The following commands will be entered in CMD.exe
 1. Clone the repository into the desired directory
    
-   ```cd C:\Users\[USER]\Desktop``` Be sure to change the directory to your desired directory
+   ```cd C:\Users\[USER]\Desktop``` 
    
    ```git clone https://github.com/ShiningLava/project_smeargle.git```
 3. Change directory and initialize the virtual environment
@@ -68,9 +68,9 @@ Once the image is saved and the process is finished, many music players will be 
 4. Install the requirements
    
     ```pip install -r requirements.txt```
-5. Edit the config file and change music_directory and stable_diffusion_url
+5. Edit the config file and change `music_directory` and `stable_diffusion_url`
    
-    - In Windows, this can easily be done by selecting "config.json" and opening it in Notepad (or text editor of your choice)
+    - In Windows, this can easily be done by selecting `config.json` and opening it in Notepad (or text editor of your choice)
 	
 6. Run the script
 
@@ -96,26 +96,26 @@ A: Once you have Stable Diffusion set up locally, you can edit the `webui-user.b
 
 Q: How do I get rid of the images made by this script?
 
-A: Run the `Cover_Image_Remover.py` script. It's recommended to set `dry_run_enabled` = `true` in config.json file first to test the script. Once you are satisfied with the results printed in the console, set `dry_run_enabled` = `false` in `config.json` and run the script again to actually delete PS images.
+A: Run the `Cover_Image_Remover.py` script. It's recommended to set `dry_run_enabled` = `true` in `config.json` file first to test the script. Once you are satisfied with the results printed in the console, set `dry_run_enabled` = `false` in `config.json` and run the script again to actually delete PS images.
 
 
 Q: I ran `smeargle.py` but I didn't get any artwork with my music. What gives?
 
-A: Check `onfig.json` file and double check `dry_run_enabled` and `test_folder_enabled`. `Dry_run_enabled` will skip generating art and the `test_folder_enabled` will generate art, but will save them at /project_smeargle/test_image_output instead of saving them with the music file.
+A: Check `config.json` file and double check `dry_run_enabled` and `test_folder_enabled`. `Dry_run_enabled` will skip generating art and the `test_folder_enabled` will generate art, but will save them at /project_smeargle/test_image_output instead of saving them with the music file.
 
 Q: Why don't you support more file types?
 
-A: PS should have support for more file types soon^(tm). I would like to add support for .wav, .flac, .aac, .mkv, and more
+A: PS should have support for more file types soon^(tm). I would like to add support for .wav, .aac, .mkv, and more
 
 
 Q: Why the space theme for the Stable Diffusion prompt?
 
-A: I'm not good at prompting in Stable Diffusion at the moment. Space is an easy theme for SD to make as it's easy to hide simple AI mistakes, as well as generally making images that aren't ugly to look at. If you feel like you can make better prompts, feel free to edit the "prompt" in `config.json`!
+A: Space is an easy theme for SD to produce as it's easy to hide simple AI mistakes, as well as generally making images that aren't ugly to look at. If you feel like you can make better prompts, feel free to edit the "prompt" in `config.json`!
 
 
 Q: Can I change the parameters of the API call?
 
-A: Yes, however this must be done in the `smeargle.py` script instead of `config.json`. This can be found in the function `sd_api_call` in the script. If you would like to adjust these settings, please see the example in the Stable Diffusion txt2img API documentation at `http://<stable_diffusion_ip>:7860/docs#/default/text2imgapi_sdapi_v1_txt2img_post` for syntax guidance. 
+A: Yes, however this must be done in the `smeargle.py` script instead of `config.json`. This can be found in the function `sd_api_call` in the script. If you would like to adjust these settings, please see the example in the Stable Diffusion txt2img API documentation at `http://<stable_diffusion_ip>:7860/docs#/default/text2imgapi_sdapi_v1_txt2img_post`. 
 
 
 Q: Your code sucks?
