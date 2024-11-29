@@ -43,6 +43,7 @@ test_image_output_folder = "test_image_output/"
 negative_prompt = config['negative_prompt']
 negative_prompt_var = f"{negative_prompt}"
 sd_progress = 0
+unsupported_file_list = []
 
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
@@ -272,6 +273,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
 def main():
     args = argument_parser()
     global unsupported_file_count
+    global unsupported_file_list
 
     start_time = time.time()
 
@@ -284,6 +286,7 @@ def main():
         print(f"Current Directory: {dirpath}")
         print(f"Found Files: {files}")
         for musicfile in files:
+            musicfilepath = os.path.join(dirpath, musicfile)
             if musicfile.endswith(".mp3"):
                 check_and_generate(dirpath, musicfile, music_extension=".mp3")
                 if sd_progress > 0:
@@ -307,11 +310,13 @@ def main():
             else:
                 print(f"unsupported file type: {dirpath}/{musicfile}\n")
                 unsupported_file_count += 1
+                unsupported_file_list += [musicfilepath]
 
     print("Scipt complete in %s seconds" % (time.time() - start_time))
     print(f"Total images created: {api_call_count}")
     if unsupported_file_count > 0:
     	print(f"Total files skipped due to unsupported file types: {unsupported_file_count}")
+    	print(f"Unsupported files: {unsupported_file_list}")
 
 def argument_parser():
     parser = argparse.ArgumentParser()
