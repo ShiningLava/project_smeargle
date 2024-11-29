@@ -3,7 +3,7 @@ Thanks for checking out Project Smeargle!
 
 Music players tested: Plex, Plexamp, VLC
 
-### Currently supported music file types: .mp3, .opus, .flac
+### Currently supported music file types: .mp3, .opus, .flac, .wav, .m4a
 
 
 Project Smeargle is a python script that is designed to detect if your music files are missing artwork. If they are, PS will send an API call to a locally hosted Stable Diffusion instance to generate some artwork. After image generation, the image will (optionally) be processed to include the artist, song title, as well as a logo printed on the image. This processed image will then be saved as a cover.png file alongside the music file, with image tags and a watermark to indicate that it is AI generated. 
@@ -85,7 +85,7 @@ A: No. PS is designed to not write anything to your music files directly. PS wil
 
 Q: How do I set up Stable Diffusion? 
 
-A: You'll need to see Stable Diffusion documentation for this. https://github.com/AUTOMATIC1111/stable-diffusion-webui
+A: You'll need to see Stable Diffusion documentation for this. `https://github.com/AUTOMATIC1111/stable-diffusion-webui`
 
 
 Q: How do I enable the Stable Diffusion API?
@@ -105,12 +105,12 @@ A: Check `config.json` file and double check `dry_run_enabled` and `test_folder_
 
 Q: Why don't you support more file types?
 
-A: PS should have support for more file types soon^(tm). I would like to add support for .wav, .aac, .mkv, and more
+A: PS should have support for more file types soon^(tm). I would like to add support for .aac, .mkv, and more
 
 
 Q: Why the space theme for the Stable Diffusion prompt?
 
-A: Space is an easy theme for SD to produce as it's easy to hide simple AI mistakes, as well as generally making images that aren't ugly to look at. If you feel like you can make better prompts, feel free to edit the "prompt" in `config.json`!
+A: Space is an easy theme for SD to produce as it's easy to hide simple AI mistakes, as well as generally making images that aren't ugly to look at. If you feel like you can make better prompts, feel free to edit the `prompt` in `config.json`!
 
 
 Q: Can I change the parameters of the API call?
