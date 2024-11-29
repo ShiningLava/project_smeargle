@@ -238,9 +238,13 @@ def check_and_generate(dirpath, musicfile, music_extension):
     #elif music_extension == ".aac":
     	#print("AAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
     	#return
-    #elif music_extension == ".wav":
-        #print("WAV FOUND BUT SUPPORT IS NOT YET ADDED\n")
-        #return
+    elif music_extension == ".wav":
+        try:
+                if bool(tag['artwork'].first):
+                        print("non ai-generated art found. skipping file (.wav)\n")
+                        return
+        except:
+                print("keyError .wav\n")
     #elif music_extension == ".mkv":
         #print("MKV FOUND BUT SUPPORT IS NOT YET ADDED\n")
         #return
@@ -294,8 +298,8 @@ def main():
                 	break
             #elif musicfile.endswith(".aac"):
             	#check_and_generate(dirpath, musicfile, music_extension=".aac")
-            #elif musicfile.endswith(".wav"):
-                #check_and_generate(dirpath, musicfile, music_extension=".wav")
+            elif musicfile.endswith(".wav"):
+                check_and_generate(dirpath, musicfile, music_extension=".wav")
             #elif musicfile.endswith(".mkv"):
                 #check_and_generate(dirpath, musicfile, music_extension=".mkv")
             elif musicfile.endswith((".jpg", ".png")):
