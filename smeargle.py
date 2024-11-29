@@ -235,7 +235,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
     			print("non ai-generated art found. skipping file (.flac)\n")
     			return
     	except:
-    		print("keyError .flac\n")
+    		print(".flac found with no attached artwork. checking if cover.png exists\n")
     #elif music_extension == ".aac":
     	#print("AAC FOUND BUT SUPPORT IS NOT YET ADDED\n")
     	#return
@@ -245,10 +245,18 @@ def check_and_generate(dirpath, musicfile, music_extension):
                         print("non ai-generated art found. skipping file (.wav)\n")
                         return
         except:
-                print("keyError .wav\n")
+                print(".wav found with no attached artwork. checking if cover.png exists\n")
     #elif music_extension == ".mkv":
         #print("MKV FOUND BUT SUPPORT IS NOT YET ADDED\n")
         #return
+
+    elif music_extension == ".m4a":
+        try:
+                if bool(tag['artwork'].first):
+                        print("non ai-generated art found. skipping file (.m4a)\n")
+                        return
+        except:
+                print(".m4a found with no attached artwork. checking if cover.png exists\n")
 
     # check if cover.png exists (common artwork format)
     if os.path.isfile(f"{dirpath}/cover.png"):
@@ -305,6 +313,8 @@ def main():
                 check_and_generate(dirpath, musicfile, music_extension=".wav")
             #elif musicfile.endswith(".mkv"):
                 #check_and_generate(dirpath, musicfile, music_extension=".mkv")
+            elif musicfile.endswith(".m4a"):
+                check_and_generate(dirpath, musicfile, music_extension=".m4a")
             elif musicfile.endswith((".jpg", ".png")):
                 print(f"potential cover art found: {musicfile}")
             else:
