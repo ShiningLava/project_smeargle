@@ -57,16 +57,23 @@ def sd_api_call(dirpath, artist_item, title_item):
 
     # arg parser stuff (need to consolidate)
     args = argument_parser()
-    test_folder_enabled = args.test_folder_enabled
-    print_artist_item = args.print_artist_item
-    print_track_item = args.print_track_item
     dry_run_enabled = args.dry_run_enabled
+    icon_path = args.icon_path
 
     # below errors out and/or needs fixes to default values
     #blur_level = args.blur_level
     #sleep_timer = args.sleep_timer
     #stable_diffusion_address = args.stable_diffusion_address
     #prompt_var = f"{args.prompt}"
+    #print_artist_item = args.print_artist_item
+    #print_icon = args.print_icon
+
+    # console says that it saves cover.png in test folder but it doesn't really
+    #test_folder_enabled = args.test_folder_enabled
+
+    # below errors out due to previous errors (font found on windows but not linux)
+    #print_track_item = args.print_track_item
+
 
 
     sd_progress = 0
@@ -232,6 +239,7 @@ def check_and_generate(dirpath, musicfile, music_extension):
 
 
     # check if there is any artwork attached to the file ("artwork" tag)
+    # can likely consolidate a lot of this logic as .opus so far is the only file type that needs extra logic
     if music_extension == ".mp3":
         	try:
         		if bool(tag['artwork'].first):
@@ -299,6 +307,10 @@ def check_and_generate(dirpath, musicfile, music_extension):
 
 def main():
     args = argument_parser()
+
+    # below is disabled due to default values not working properly
+    #music_directory = args.music_directory
+    
     global unsupported_file_count
     global unsupported_file_list
 
@@ -349,17 +361,18 @@ def main():
 
 def argument_parser():
     parser = argparse.ArgumentParser()
+
+    # lines disabled below are not currently functioning and need work (most likely due to defaults)
     parser.add_argument("--config", type=argparse.FileType('r', encoding='UTF-8'))
-    parser.add_argument("--music_directory", type=str, help="Full directory path for your music directory. example: /mnt/data/Music, or C:\\Users\\user\\Music")
+    #parser.add_argument("--music_directory", type=str, help="Full directory path for your music directory. example: /mnt/data/Music, or C:\\Users\\user\\Music")
     parser.add_argument("--icon_path", type=str, help="Path to icon. If you use a custom icon, it should be size 150x150. Currently, only .png files supported")
-    parser.add_argument("--sleep_timer", type=int, help="The number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down")
+    #parser.add_argument("--sleep_timer", type=int, help="The number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down")
     parser.add_argument("--dry_run_enabled", type=bool, help="Skip generating new images, instead will just analyze the music_directory and print results in the console")
     parser.add_argument("--regenerate_ai_artwork", type=bool, help="Every cover.png in the music_directory or subdirectories that has the 'Author' tag set to 'AI' will be deleted and regenerated")
-    parser.add_argument("--blur_level", type=int, help="0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance")
+    #parser.add_argument("--blur_level", type=int, help="0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance")
     #parser.add_argument("--stable_diffusion_address", type=str, help="Use API calls to public or paid instances at your own risk")
-    
-    parser.add_argument("--prompt", type=str)
-    parser.add_argument("--test_image_output_folder", type=str)
+    #parser.add_argument("--prompt", type=str)
+    #parser.add_argument("--test_image_output_folder", type=str)
 
     # This could take a string, and if set use that path otherwise do the default
     parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
