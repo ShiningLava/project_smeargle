@@ -55,6 +55,20 @@ def sd_api_call(dirpath, artist_item, title_item):
     global blur_level
     global sd_progress
 
+    # arg parser stuff (need to consolidate)
+    args = argument_parser()
+    test_folder_enabled = args.test_folder_enabled
+    print_artist_item = args.print_artist_item
+    print_track_item = args.print_track_item
+    dry_run_enabled = args.dry_run_enabled
+
+    # below errors out and/or needs fixes to default values
+    #blur_level = args.blur_level
+    #sleep_timer = args.sleep_timer
+    #stable_diffusion_address = args.stable_diffusion_address
+    #prompt_var = f"{args.prompt}"
+
+
     sd_progress = 0
 
     # Increment the total api call counter
@@ -211,6 +225,11 @@ def check_and_generate(dirpath, musicfile, music_extension):
     musicfilepath = os.path.join(dirpath, musicfile)
     print(f"{music_extension} found: {musicfilepath}")
     tag = music_tag.load_file(f"{musicfilepath}")
+    args = argument_parser()
+
+    # arg parser stuff (consolidate this later)
+    regenerate_ai_artwork = args.regenerate_ai_artwork
+
 
     # check if there is any artwork attached to the file ("artwork" tag)
     if music_extension == ".mp3":
@@ -337,7 +356,7 @@ def argument_parser():
     parser.add_argument("--dry_run_enabled", type=bool, help="Skip generating new images, instead will just analyze the music_directory and print results in the console")
     parser.add_argument("--regenerate_ai_artwork", type=bool, help="Every cover.png in the music_directory or subdirectories that has the 'Author' tag set to 'AI' will be deleted and regenerated")
     parser.add_argument("--blur_level", type=int, help="0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance")
-    parser.add_argument("--stable_diffusion_address", type=str, help="Use API calls to public or paid instances at your own risk")
+    #parser.add_argument("--stable_diffusion_address", type=str, help="Use API calls to public or paid instances at your own risk")
     
     parser.add_argument("--prompt", type=str)
     parser.add_argument("--test_image_output_folder", type=str)
