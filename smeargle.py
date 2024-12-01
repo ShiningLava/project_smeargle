@@ -342,10 +342,14 @@ def main():
             	#check_and_generate(dirpath, musicfile, music_extension=".aac")
             elif musicfile.endswith(".wav"):
                 check_and_generate(dirpath, musicfile, music_extension=".wav")
+                if sd_progress > 0:
+                        break
             #elif musicfile.endswith(".mkv"):
                 #check_and_generate(dirpath, musicfile, music_extension=".mkv")
             elif musicfile.endswith(".m4a"):
                 check_and_generate(dirpath, musicfile, music_extension=".m4a")
+                if sd_progress > 0:
+                        break
             elif musicfile.endswith((".jpg", ".png")):
                 print(f"potential cover art found: {musicfile}")
             else:
