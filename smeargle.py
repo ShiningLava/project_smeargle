@@ -322,37 +322,42 @@ def main():
 
     music_directory = args.music_directory
     random_selection_enabled = args.random_selection_enabled
+    image_limit = args.image_limit
 
     if not os.path.exists(test_image_output_folder):
         os.makedirs(test_image_output_folder)
 
     # select random songs
-    # below is unfinished. need to find a way to create the list and pass musicfile/dirpath in tuple
     if bool(random_selection_enabled):
     	for dirpath, dirs, files in os.walk(music_directory):
     		for musicfile in files:
-    			musicfilepath = os.path.join(dirpath, musicfile)
+    			#musicfilepath = os.path.join(dirpath, musicfile)
     			if musicfile.endswith(".mp3"):
-    				song_list.append(musicfilepath)
+    				song_list.append((dirpath, musicfile))
     			if musicfile.endswith(".opus"):
-    				song_list.append(musicfilepath)
+    				song_list.append((dirpath, musicfile))
     			if musicfile.endswith(".wav"):
-    				song_list.append(musicfilepath)
+    				song_list.append((dirpath, musicfile))
+
+
+        # need to finish the below to account for image limits properly
     	if image_limit > 0:
     		random_song = random.sample(song_list, image_limit)
     	else:
     		random_song = random.choice(song_list)
     	print(random_song)
 
-    	#for dirpath, diles, files in os.walk(random_song):
-    		#for musicfile in files:
-    			#if random_song.endswith(".mp3"):
-    				#print("yipee")
 
-    	#if random_song.endswith(".mp3"):
-    		#musicfile = random_song
-    		#dirpath = 
-    		#check_and_generate(dirpath, musicfile, music_extension=".mp3")
+    	for i in random_song:
+    		(dirpath, musicfile) = i
+    		if musicfile.endswith(".mp3"):
+    			check_and_generate(dirpath, musicfile, music_extension=".mp3")
+    		elif musicfile.endswith(".opus"):
+    			check_and_generate(dirpath, musicfile, music_extension=".opus")
+
+    	print("Scipt complete in %s seconds" % (time.time() - start_time))
+    	print(f"Total images created: {api_call_count}")
+
     	return
 
     # Walk through the directory and scan files for file types (.mp3, .opus, etc)
@@ -407,6 +412,7 @@ def argument_parser():
     global music_directory
     global sleep_timer
     global random_selection_enabled
+    global image_limit
     parser = argparse.ArgumentParser()
 
     # lines disabled below are not currently functioning and need work (most likely due to defaults)
@@ -421,6 +427,7 @@ def argument_parser():
     parser.add_argument("--prompt", type=str, default=prompt_var)
     #parser.add_argument("--test_image_output_folder", type=str)
     parser.add_argument("--random_selection_enabled", type=bool, default=bool(random_selection_enabled))
+    parser.add_argument("--image_limit", type=int, default=image_limit)
 
     # This could take a string, and if set use that path otherwise do the default
     #parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
