@@ -309,11 +309,6 @@ def check_and_generate(dirpath, musicfile, music_extension):
         print(f"Total images created: {api_call_count}\n")
 
 def main():
-    args = argument_parser()
-
-    # below is disabled due to default values not working properly
-    music_directory = args.music_directory
-    
     global unsupported_file_count
     global unsupported_file_list
     global random_selection_enabled
@@ -322,11 +317,17 @@ def main():
     global image_limit
 
     start_time = time.time()
+    
+    args = argument_parser()
+
+    music_directory = args.music_directory
+    random_selection_enabled = args.random_selection_enabled
 
     if not os.path.exists(test_image_output_folder):
         os.makedirs(test_image_output_folder)
 
     # select random songs
+    # below is unfinished. need to find a way to create the list and pass musicfile/dirpath in tuple
     if bool(random_selection_enabled):
     	for dirpath, dirs, files in os.walk(music_directory):
     		for musicfile in files:
@@ -405,6 +406,7 @@ def argument_parser():
     global stable_diffusion_address
     global music_directory
     global sleep_timer
+    global random_selection_enabled
     parser = argparse.ArgumentParser()
 
     # lines disabled below are not currently functioning and need work (most likely due to defaults)
@@ -418,6 +420,7 @@ def argument_parser():
     parser.add_argument("--stable_diffusion_address", type=str, default=stable_diffusion_address, help="Use API calls to public or paid instances at your own risk")
     parser.add_argument("--prompt", type=str, default=prompt_var)
     #parser.add_argument("--test_image_output_folder", type=str)
+    parser.add_argument("--random_selection_enabled", type=bool, default=bool(random_selection_enabled))
 
     # This could take a string, and if set use that path otherwise do the default
     #parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
