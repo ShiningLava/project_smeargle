@@ -44,6 +44,9 @@ negative_prompt = config['negative_prompt']
 negative_prompt_var = f"{negative_prompt}"
 sd_progress = 0
 unsupported_file_list = []
+random_selection_enabled = config['random_selection_enabled']
+song_list = []
+image_limit = config['image_limit']
 
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
@@ -313,11 +316,43 @@ def main():
     
     global unsupported_file_count
     global unsupported_file_list
+    global random_selection_enabled
+    global song_list_dirpath
+    global song_list_musicfile
+    global image_limit
 
     start_time = time.time()
 
     if not os.path.exists(test_image_output_folder):
         os.makedirs(test_image_output_folder)
+
+    # select random songs
+    if bool(random_selection_enabled):
+    	for dirpath, dirs, files in os.walk(music_directory):
+    		for musicfile in files:
+    			musicfilepath = os.path.join(dirpath, musicfile)
+    			if musicfile.endswith(".mp3"):
+    				song_list.append(musicfilepath)
+    			if musicfile.endswith(".opus"):
+    				song_list.append(musicfilepath)
+    			if musicfile.endswith(".wav"):
+    				song_list.append(musicfilepath)
+    	if image_limit > 0:
+    		random_song = random.sample(song_list, image_limit)
+    	else:
+    		random_song = random.choice(song_list)
+    	print(random_song)
+
+    	#for dirpath, diles, files in os.walk(random_song):
+    		#for musicfile in files:
+    			#if random_song.endswith(".mp3"):
+    				#print("yipee")
+
+    	#if random_song.endswith(".mp3"):
+    		#musicfile = random_song
+    		#dirpath = 
+    		#check_and_generate(dirpath, musicfile, music_extension=".mp3")
+    	return
 
     # Walk through the directory and scan files for file types (.mp3, .opus, etc)
     # After image creation, break to change directories to prevent duplicate work

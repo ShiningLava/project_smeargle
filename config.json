@@ -29,5 +29,9 @@
 
   "print_artist_item" : true,
   "print_track_item" : false,
-  "print_icon" : true
+  "print_icon" : true,
+  "random_selection_enabled" : false,
+
+  "image_limit" : 0,
+  "_comment" : "maximum number of images script will produce. 0 = no limit"
 }
