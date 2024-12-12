@@ -177,7 +177,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     if bool(print_track_item) == True:
         # Set font properties for artist text
         font_size = 100
-        font = ImageFont.truetype('times', font_size)
+        font = ImageFont.load_default(font_size)
 
         # Set position of track_item
         outline_color = 'black'
@@ -185,7 +185,7 @@ def sd_api_call(dirpath, artist_item, title_item):
         text = f"{title_item}"
         img_fraction = 0.95
         while font_size > 9:
-            font = ImageFont.truetype("ariblk.ttf", font_size)
+            font = ImageFont.load_default(font_size)
             if font.getlength(text) < img_fraction * 400:
                 break
             else:
@@ -198,11 +198,6 @@ def sd_api_call(dirpath, artist_item, title_item):
             x = (im1.width - text_width) // 50
         y = ((im1.height - text_height) // 2) + 75
 
-        #text_height = font_size
-        #text_width = draw.textlength(text, font)
-        #x = (im1.width - text_width) // 2
-        #y = ((im1.height - text_height) // 2) + 10
-
         # Draw the track text on the image
         draw.text((x, y), text, fill=text_color, font=font, stroke_width=2, stroke_fill=outline_color)
 
@@ -213,7 +208,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     image = Image.open('im1.png')
     metadata = PngInfo()
     metadata.add_text('Author', 'AI')
-    if bool(test_folder_enabled)== True:
+    if bool(test_folder_enabled) == True:
         image.save(f'test_image_output/{api_call_count}.png', pnginfo=metadata)
         print(f"image successfully created, tagged, and moved to test_image_output/{api_call_count}.png. sleeping for {sleep_timer}s")
     else:
