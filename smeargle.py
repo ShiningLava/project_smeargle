@@ -413,6 +413,7 @@ def argument_parser():
     global sleep_timer
     global random_selection_enabled
     global image_limit
+    global dry_run_enabled
     parser = argparse.ArgumentParser()
 
     # lines disabled below are not currently functioning and need work (most likely due to defaults)
@@ -420,7 +421,7 @@ def argument_parser():
     parser.add_argument("--music_directory", type=str, default=music_directory, help="Full directory path for your music directory. example: /mnt/data/Music, or C:\\Users\\user\\Music")
     parser.add_argument("--icon_path", type=str, default="icon.png", help="Path to icon. If you use a custom icon, it should be size 150x150. Currently, only .png files supported")
     parser.add_argument("--sleep_timer", type=int, default=sleep_timer, help="The number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down")
-    parser.add_argument("--dry_run_enabled", type=bool, help="Skip generating new images, instead will just analyze the music_directory and print results in the console")
+    parser.add_argument("--dry_run_enabled", type=bool, default=dry_run_enabled, help="Skip generating new images, instead will just analyze the music_directory and print results in the console")
     parser.add_argument("--regenerate_ai_artwork", type=bool, help="Every cover.png in the music_directory or subdirectories that has the 'Author' tag set to 'AI' will be deleted and regenerated")
     #parser.add_argument("--blur_level", type=int, help="0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance")
     parser.add_argument("--stable_diffusion_address", type=str, default=stable_diffusion_address, help="Use API calls to public or paid instances at your own risk")
