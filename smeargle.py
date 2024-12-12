@@ -72,7 +72,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     #print_icon = args.print_icon
 
     # console says that it saves cover.png in test folder but it doesn't really
-    #test_folder_enabled = args.test_folder_enabled
+    test_folder_enabled = args.test_folder_enabled
 
     # below errors out due to previous errors (font found on windows but not linux)
     #print_track_item = args.print_track_item
@@ -213,7 +213,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     image = Image.open('im1.png')
     metadata = PngInfo()
     metadata.add_text('Author', 'AI')
-    if bool(test_folder_enabled):
+    if bool(test_folder_enabled)== True:
         image.save(f'test_image_output/{api_call_count}.png', pnginfo=metadata)
         print(f"image successfully created, tagged, and moved to test_image_output/{api_call_count}.png. sleeping for {sleep_timer}s")
     else:
@@ -431,7 +431,7 @@ def argument_parser():
     parser.add_argument("--image_limit", type=int, default=image_limit)
 
     # This could take a string, and if set use that path otherwise do the default
-    #parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
+    parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
 
     # Maybe add help for these?
     parser.add_argument("--print_artist_item", type=bool)
