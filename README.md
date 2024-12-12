@@ -84,23 +84,27 @@ Once the image is saved and the process is finished, most music players will be 
 
 # USAGE:
 
-Use the config file to pass defaults
+Use the config file to pass defaults:
 
 ```python3 smeargle.py --config config.json```
 
-Use a custom prompt
+
+Use a custom prompt:
 
 ```python3 smeargle.py --prompt "enter custom prompt here"```
 
-Scan a different `music_directory` and regenerate previously made cover.pngs
+
+Scan a different `music_directory` and regenerate previously made cover.pngs:
 
 ```python3 smeargle.py --music_directory /path/to/music/directory --regenerate_ai_images true```
 
-Target songs in a random order and limit the script to only scan 50 songs (useful for automation and overnight tasks)
+
+Target songs in a random order and limit the script to only scan 50 songs (useful for automation and overnight tasks):
 
 Edit `config.json` and set `random_selection_enabled` to`true`
 
 ```python3 smeargle.py --config config.json --image_limit 50```
+
 
 # FAQ:
 
