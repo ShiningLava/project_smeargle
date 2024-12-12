@@ -21,12 +21,12 @@ Once the image is saved and the process is finished, most music players will be 
 
 # Setup Guide:
 ## Prerequisites: 
-1. Download and setup the Stable Diffusion application with the API enabled
+1. Download and setup the Stable Diffusion application with the API exposed:
 	- See SD documentation at https://github.com/AUTOMATIC1111/stable-diffusion-webui
-2. Download and install Python
-   	- Be sure to select "add to PATH" during installation
+2. Download and install Python:
+   	- Be sure to select `add to PATH` during installation
    	- Python will be installed by default on most Linux distros
-3. Download and install Git
+3. Download and install Git:
    	- On windows, in CMD enter ```winget install Git.Git```
    		- Restart CMD
    	- Git will be installed by default on most Linux Distros
@@ -82,21 +82,17 @@ Once the image is saved and the process is finished, most music players will be 
 
     ```python smeargle.py```
 
+
 # USAGE:
 
-Use the config file to pass defaults:
-
-```python3 smeargle.py --config config.json```
-
-
-Do a dry run to test the script and your config defaults:
+Use the config file to pass default arguments and do a dry run scan of your `music_directory`:
 
 ```python3 smeargle.py --config config.json --dry_run_enabled true```
 
 
-Use a custom prompt:
+Use a custom prompt and save the images to the test folder at `project_smeargle/test_image_output/` to test new prompts:
 
-```python3 smeargle.py --prompt "enter custom prompt here"```
+```python3 smeargle.py --prompt "enter custom prompt here" --test_folder_enabled true```
 
 
 Scan a different `music_directory` and regenerate previously made cover.pngs:
@@ -106,7 +102,7 @@ Scan a different `music_directory` and regenerate previously made cover.pngs:
 
 Target songs in a random order and limit the script to only scan 50 songs (useful for automation and overnight tasks):
 
-Edit `config.json` and set `random_selection_enabled` to`true`
+Edit `config.json` and set `random_selection_enabled` to `true`
 
 ```python3 smeargle.py --config config.json --image_limit 50```
 
