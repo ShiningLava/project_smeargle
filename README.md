@@ -89,6 +89,11 @@ Use the config file to pass defaults:
 ```python3 smeargle.py --config config.json```
 
 
+Do a dry run to test the script and your config defaults:
+
+```python3 smeargle.py --config config.json --dry_run_enabled true```
+
+
 Use a custom prompt:
 
 ```python3 smeargle.py --prompt "enter custom prompt here"```
