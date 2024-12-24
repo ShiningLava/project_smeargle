@@ -39,7 +39,7 @@ print_icon = config['print_icon']
 blur_level = config['blur_level']
 prompt = config['prompt']
 prompt_var = f"{prompt}"
-test_image_output_folder = "test_image_output/"
+test_image_output_folder = config['test_image_output_folder']
 negative_prompt = config['negative_prompt']
 negative_prompt_var = f"{negative_prompt}"
 sd_progress = 0
@@ -51,33 +51,30 @@ image_limit = config['image_limit']
 def sd_api_call(dirpath, artist_item, title_item):
     global api_call_count
     global test_folder_enabled
+    global test_image_output_folder
     global stable_diffusion_address
     global prompt_var
     global print_artist_item
     global print_track_item
     global blur_level
     global sd_progress
+    global print_icon
 
     # arg parser stuff (need to consolidate)
     args = argument_parser()
     dry_run_enabled = args.dry_run_enabled
     icon_path = args.icon_path
+    test_image_output_folder = args.test_image_output_folder
+    test_folder_enabled = args.test_folder_enabled
 
     # below errors out and/or needs fixes to default values
     #blur_level = args.blur_level
     sleep_timer = args.sleep_timer
     stable_diffusion_address = args.stable_diffusion_address
     prompt_var = f"{args.prompt}"
-    #print_artist_item = args.print_artist_item
-    #print_icon = args.print_icon
-
-    # console says that it saves cover.png in test folder but it doesn't really
-    #test_folder_enabled = args.test_folder_enabled
-
-    # below errors out due to previous errors (font found on windows but not linux)
-    #print_track_item = args.print_track_item
-
-
+    print_artist_item = args.print_artist_item
+    print_icon = args.print_icon
+    print_track_item = args.print_track_item
 
     sd_progress = 0
 
@@ -121,7 +118,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     im1.save('im1.png', pnginfo=pnginfo)
 
     # Watermark
-    if bool(print_icon) == True:
+    if bool(print_icon):
         original_image = Image.open('im1.png')
         watermark = Image.open(icon_path)
         transparency = 135
@@ -143,7 +140,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     image = Image.open('im1.png')
     draw = ImageDraw.Draw(image)
 
-    if bool(print_artist_item) == True:
+    if bool(print_artist_item):
         # Set font properties for artist text
         font_size = 100
         font = ImageFont.load_default(font_size)
@@ -174,10 +171,10 @@ def sd_api_call(dirpath, artist_item, title_item):
         # Save image
         image.save('im1.png')
 
-    if bool(print_track_item) == True:
+    if bool(print_track_item):
         # Set font properties for artist text
         font_size = 100
-        font = ImageFont.truetype('times', font_size)
+        font = ImageFont.load_default(font_size)
 
         # Set position of track_item
         outline_color = 'black'
@@ -185,7 +182,7 @@ def sd_api_call(dirpath, artist_item, title_item):
         text = f"{title_item}"
         img_fraction = 0.95
         while font_size > 9:
-            font = ImageFont.truetype("ariblk.ttf", font_size)
+            font = ImageFont.load_default(font_size)
             if font.getlength(text) < img_fraction * 400:
                 break
             else:
@@ -198,11 +195,6 @@ def sd_api_call(dirpath, artist_item, title_item):
             x = (im1.width - text_width) // 50
         y = ((im1.height - text_height) // 2) + 75
 
-        #text_height = font_size
-        #text_width = draw.textlength(text, font)
-        #x = (im1.width - text_width) // 2
-        #y = ((im1.height - text_height) // 2) + 10
-
         # Draw the track text on the image
         draw.text((x, y), text, fill=text_color, font=font, stroke_width=2, stroke_fill=outline_color)
 
@@ -213,9 +205,11 @@ def sd_api_call(dirpath, artist_item, title_item):
     image = Image.open('im1.png')
     metadata = PngInfo()
     metadata.add_text('Author', 'AI')
-    if bool(test_folder_enabled):
-        image.save(f'test_image_output/{api_call_count}.png', pnginfo=metadata)
-        print(f"image successfully created, tagged, and moved to test_image_output/{api_call_count}.png. sleeping for {sleep_timer}s")
+    if bool(test_folder_enabled) == True:
+        # The below syntax requires the input for test_image_output_folder arg to have an ending slash
+        # i.e. test_image_output_folder/
+        image.save(f'{test_image_output_folder}{api_call_count}.png', pnginfo=metadata)
+        print(f"image successfully created, tagged, and moved to {test_image_output_folder}{api_call_count}.png. sleeping for {sleep_timer}s")
     else:
         image.save(f'{dirpath}/cover.png', pnginfo=metadata)
         print(f"image successfully created, tagged, and moved to {dirpath}/cover.png. sleeping for {sleep_timer}s\n")
@@ -315,23 +309,27 @@ def main():
     global song_list_dirpath
     global song_list_musicfile
     global image_limit
+    global test_image_output_folder
 
     start_time = time.time()
-    
-    args = argument_parser()
 
+    args = argument_parser()
     music_directory = args.music_directory
     random_selection_enabled = args.random_selection_enabled
     image_limit = args.image_limit
+    test_image_output_folder = args.test_image_output_folder
+
+    # lazy way of spacing out the start of the console
+    print(" ")
 
     if not os.path.exists(test_image_output_folder):
         os.makedirs(test_image_output_folder)
 
     # select random songs
     if bool(random_selection_enabled):
+    	print(f"selecting {image_limit} music files")
     	for dirpath, dirs, files in os.walk(music_directory):
     		for musicfile in files:
-    			#musicfilepath = os.path.join(dirpath, musicfile)
     			if musicfile.endswith(".mp3"):
     				song_list.append((dirpath, musicfile))
     			if musicfile.endswith(".opus"):
@@ -339,13 +337,16 @@ def main():
     			if musicfile.endswith(".wav"):
     				song_list.append((dirpath, musicfile))
 
+    	print(f"random music files selected: {image_limit}")
 
         # need to finish the below to account for image limits properly
     	if image_limit > 0:
     		random_song = random.sample(song_list, image_limit)
+    	# the below does not work properly if image_limit isn't specified in cmd line args
     	else:
     		random_song = random.choice(song_list)
-    	print(random_song)
+    	# consider adding below for verbose args
+    	# print(random_song)
 
 
     	for i in random_song:
@@ -362,7 +363,7 @@ def main():
 
     # Walk through the directory and scan files for file types (.mp3, .opus, etc)
     # After image creation, break to change directories to prevent duplicate work
-    # This section can definitely be shortened/optimized to include multiple file types in a single line
+    # This section can probably be shortened/optimized to include multiple file types in a single line
     for dirpath, dirs, files in os.walk(music_directory):
         print(f"Current Directory: {dirpath}")
         print(f"Found Files: {files}")
@@ -407,13 +408,17 @@ def main():
 
 def argument_parser():
     global prompt_var
-    #global test_folder_enabled
+    global test_folder_enabled
     global stable_diffusion_address
     global music_directory
     global sleep_timer
     global random_selection_enabled
     global image_limit
     global dry_run_enabled
+    global print_track_item
+    global print_artist_item
+    global test_image_output_folder
+    global print_icon
     parser = argparse.ArgumentParser()
 
     # lines disabled below are not currently functioning and need work (most likely due to defaults)
@@ -426,17 +431,17 @@ def argument_parser():
     #parser.add_argument("--blur_level", type=int, help="0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance")
     parser.add_argument("--stable_diffusion_address", type=str, default=stable_diffusion_address, help="Use API calls to public or paid instances at your own risk")
     parser.add_argument("--prompt", type=str, default=prompt_var)
-    #parser.add_argument("--test_image_output_folder", type=str)
-    parser.add_argument("--random_selection_enabled", type=bool, default=bool(random_selection_enabled))
+    parser.add_argument("--test_image_output_folder", default=test_image_output_folder, type=str)
+    parser.add_argument("--random_selection_enabled", type=bool, default=random_selection_enabled)
     parser.add_argument("--image_limit", type=int, default=image_limit)
 
     # This could take a string, and if set use that path otherwise do the default
-    #parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
+    parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
 
     # Maybe add help for these?
-    parser.add_argument("--print_artist_item", type=bool)
-    parser.add_argument("--print_track_item", type=bool)
-    parser.add_argument("--print_icon", type=bool)
+    parser.add_argument("--print_artist_item", default=print_artist_item, type=bool)
+    parser.add_argument("--print_track_item", default=print_track_item, type=bool)
+    parser.add_argument("--print_icon", default=print_icon, type=bool)
 
     # If we get a json config file, it will set the defaults
     args, unknown = parser.parse_known_args()
