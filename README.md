@@ -102,9 +102,7 @@ Scan a different `music_directory` and regenerate previously made cover.pngs:
 
 Target songs in a random order and limit the script to only scan 50 songs (useful for automation and overnight tasks):
 
-Edit `config.json` and set `random_selection_enabled` to `true`
-
-```python3 smeargle.py --config config.json --image_limit 50```
+```python3 smeargle.py --config config.json --random_selection_enabled true --image_limit 50```
 
 
 # FAQ:
