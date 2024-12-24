@@ -58,6 +58,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     global print_track_item
     global blur_level
     global sd_progress
+    global print_icon
 
     # arg parser stuff (need to consolidate)
     args = argument_parser()
@@ -71,13 +72,9 @@ def sd_api_call(dirpath, artist_item, title_item):
     sleep_timer = args.sleep_timer
     stable_diffusion_address = args.stable_diffusion_address
     prompt_var = f"{args.prompt}"
-    #print_artist_item = args.print_artist_item
-    #print_icon = args.print_icon
-
-    # below errors out due to previous errors (font found on windows but not linux)
-    #print_track_item = args.print_track_item
-
-
+    print_artist_item = args.print_artist_item
+    print_icon = args.print_icon
+    print_track_item = args.print_track_item
 
     sd_progress = 0
 
@@ -121,7 +118,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     im1.save('im1.png', pnginfo=pnginfo)
 
     # Watermark
-    if bool(print_icon) == True:
+    if bool(print_icon):
         original_image = Image.open('im1.png')
         watermark = Image.open(icon_path)
         transparency = 135
@@ -143,7 +140,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     image = Image.open('im1.png')
     draw = ImageDraw.Draw(image)
 
-    if bool(print_artist_item) == True:
+    if bool(print_artist_item):
         # Set font properties for artist text
         font_size = 100
         font = ImageFont.load_default(font_size)
@@ -174,7 +171,7 @@ def sd_api_call(dirpath, artist_item, title_item):
         # Save image
         image.save('im1.png')
 
-    if bool(print_track_item) == True:
+    if bool(print_track_item):
         # Set font properties for artist text
         font_size = 100
         font = ImageFont.load_default(font_size)
@@ -322,11 +319,15 @@ def main():
     image_limit = args.image_limit
     test_image_output_folder = args.test_image_output_folder
 
+    # lazy way of spacing out the start of the console
+    print(" ")
+
     if not os.path.exists(test_image_output_folder):
         os.makedirs(test_image_output_folder)
 
     # select random songs
     if bool(random_selection_enabled):
+    	print(f"selecting {image_limit} music files")
     	for dirpath, dirs, files in os.walk(music_directory):
     		for musicfile in files:
     			if musicfile.endswith(".mp3"):
@@ -336,6 +337,7 @@ def main():
     			if musicfile.endswith(".wav"):
     				song_list.append((dirpath, musicfile))
 
+    	print(f"random music files selected: {image_limit}")
 
         # need to finish the below to account for image limits properly
     	if image_limit > 0:
@@ -343,7 +345,8 @@ def main():
     	# the below does not work properly if image_limit isn't specified in cmd line args
     	else:
     		random_song = random.choice(song_list)
-    	print(random_song)
+    	# consider adding below for verbose args
+    	# print(random_song)
 
 
     	for i in random_song:
@@ -405,7 +408,7 @@ def main():
 
 def argument_parser():
     global prompt_var
-    #global test_folder_enabled
+    global test_folder_enabled
     global stable_diffusion_address
     global music_directory
     global sleep_timer
@@ -413,8 +416,9 @@ def argument_parser():
     global image_limit
     global dry_run_enabled
     global print_track_item
-    global artist_item
+    global print_artist_item
     global test_image_output_folder
+    global print_icon
     parser = argparse.ArgumentParser()
 
     # lines disabled below are not currently functioning and need work (most likely due to defaults)
@@ -435,9 +439,9 @@ def argument_parser():
     parser.add_argument("--test_folder_enabled", type=bool, help="Save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file")
 
     # Maybe add help for these?
-    parser.add_argument("--print_artist_item", type=bool)
+    parser.add_argument("--print_artist_item", default=print_artist_item, type=bool)
     parser.add_argument("--print_track_item", default=print_track_item, type=bool)
-    parser.add_argument("--print_icon", type=bool)
+    parser.add_argument("--print_icon", default=print_icon, type=bool)
 
     # If we get a json config file, it will set the defaults
     args, unknown = parser.parse_known_args()
