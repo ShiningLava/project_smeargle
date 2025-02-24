@@ -145,9 +145,3 @@ Q: Can I change the parameters of the API call?
 
 A: Currently this must be done in the `smeargle.py` script instead of `config.json`. This can be found in the function `sd_api_call`. If you would like to adjust these settings, please see the example in the Stable Diffusion txt2img API documentation at `http://<stable_diffusion_ip>:7860/docs#/default/text2imgapi_sdapi_v1_txt2img_post`. 
 
-
-
-Q: Your code sucks?
-
-A: Yes. 
-
