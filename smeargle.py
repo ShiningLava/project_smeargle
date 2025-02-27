@@ -97,7 +97,8 @@ def sd_api_call(dirpath, artist_item, title_item):
         "steps": 25
     }
 
-    response = requests.post(url=f'{url}', json=payload)
+    with requests.Session() as session:
+    	response = session.post(url=f'{url}', json=payload)
 
     r = response.json()
 
