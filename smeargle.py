@@ -98,7 +98,7 @@ def sd_api_call(dirpath, artist_item, title_item):
     }
 
     with requests.Session() as session:
-    	response = session.post(url=f'{url}', json=payload)
+    	response = session.post(url=f'{url}', json=payload, headers={'Connection':'close'})
 
     r = response.json()
 
