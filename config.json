@@ -14,7 +14,7 @@
   "sleep_timer" : 10,
   "_comment3" : "sleep_timer is the number of seconds the script will sleep after each image created. Helps with GPU temperatures, but slows the process down",
 
-  "dry_run_enabled" : true,
+  "dry_run_enabled" : false,
   "_comment5" : "setting dry_run_enabled to true will skip generating new images, instead will just analyze the music_directory and print results in the console",
   "_comment6" : "dry_run_enabled also effects the Cover_Image_Remover.py script",
 
