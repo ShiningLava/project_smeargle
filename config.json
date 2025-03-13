@@ -18,7 +18,7 @@
   "_comment5" : "setting dry_run_enabled to true will skip generating new images, instead will just analyze the music_directory and print results in the console",
   "_comment6" : "dry_run_enabled also effects the Cover_Image_Remover.py script",
 
-  "test_folder_enabled": true,
+  "test_folder_enabled": false,
   "_comment4" : "setting test_folder_enabled to true will save each stable diffusion image to /project_smeargle/test_image_output/ rather than placing the image with the music file",
 
   "regenerate_ai_artwork" : false,
