@@ -27,6 +27,8 @@
   "blur_level" : 0,
   "_comment8" : "0 = No blur effect applied, 5 = high blur. Blur can make SD images appear less ugly at a glance",
 
+  "test_image_output_folder" : "test_image_output_folder/",
+
   "print_artist_item" : true,
   "print_track_item" : false,
   "print_icon" : true,
